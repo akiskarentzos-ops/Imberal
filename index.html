@@ -48,21 +48,31 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Continuous Floating Animation for Icons */
+        /* Continuous Floating Animation */
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
 
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
+        /* Pulse Glow Animation for Hover */
+        @keyframes pulse-gold {
+            0% { shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(197, 160, 89, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
         }
 
-        /* Staggered Floating Delays */
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
         .delay-1 { animation-delay: 0s; }
-        .delay-2 { animation-delay: 0.5s; }
-        .delay-3 { animation-delay: 1s; }
+        .delay-2 { animation-delay: 0.7s; }
+        .delay-3 { animation-delay: 1.4s; }
+
+        .icon-hover-effect:hover {
+            animation: pulse-gold 1.5s infinite;
+        }
 
         /* Fix for tel links */
         a[href^="tel"] {
@@ -74,13 +84,9 @@
 </head>
 <body class="bg-gray-50 overflow-x-hidden">
 
-    <!-- Πλοήγηση -->
+    <!-- Πλοήγηση (Links removed for minimalist look) -->
     <nav class="absolute top-0 left-0 w-full z-50 p-8 flex justify-end items-center bg-transparent">
-        <div class="hidden md:flex space-x-10 text-white font-medium uppercase text-xs tracking-[0.2em]">
-            <a href="#" class="hover:text-imberal-gold transition-colors duration-300">Υπηρεσίες</a>
-            <a href="#" class="hover:text-imberal-gold transition-colors duration-300">Ακίνητα</a>
-            <a href="#" class="hover:text-imberal-gold transition-colors duration-300 border border-white/30 px-6 py-2 rounded-full">Επικοινωνία</a>
-        </div>
+        <!-- Navigation links removed -->
     </nav>
 
     <!-- Hero Section -->
@@ -106,7 +112,7 @@
 
                 <div class="flex flex-col sm:flex-row gap-6 mb-8">
                     <!-- Κουμπί Άμεσης Κλήσης -->
-                    <a href="tel:6934932782" class="bg-imberal-gold hover-gold text-white px-8 py-5 rounded-full transition-all duration-300 flex items-center group shadow-[0_20px_40px_rgba(0,0,0,0.3)] transform hover:-translate-y-2 relative z-50">
+                    <a href="tel:6934932782" class="bg-imberal-gold hover-gold text-white px-8 py-5 rounded-full transition-all duration-500 flex items-center group shadow-[0_20px_40px_rgba(0,0,0,0.3)] transform hover:-translate-y-2 relative z-50">
                         <div class="flex flex-col border-r border-white/20 pr-6 mr-6">
                             <span class="text-[9px] uppercase tracking-[0.2em] font-medium opacity-80 mb-1">Άμεση Κλήση</span>
                             <span class="text-lg md:text-xl font-bold tracking-tight whitespace-nowrap">6934 932 782</span>
@@ -115,7 +121,7 @@
                             <span class="text-sm md:text-base font-semibold leading-tight">Άκης Καρέντζος</span>
                             <span class="text-[9px] uppercase tracking-widest opacity-70">Senior Consultant</span>
                         </div>
-                        <div class="ml-6 bg-white/20 p-3 rounded-full group-hover:bg-white group-hover:text-imberal-gold transition-all duration-300 shadow-inner">
+                        <div class="ml-6 bg-white/20 p-3 rounded-full group-hover:bg-white group-hover:text-imberal-gold transition-all duration-500 shadow-inner">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
@@ -159,50 +165,50 @@
         </div>
     </section>
 
-    <!-- Ενότητα Υπηρεσιών με Animated Εικονίδια -->
+    <!-- Ενότητα Υπηρεσιών με Super Animated Εικονίδια -->
     <section class="py-24 bg-white relative z-40 shadow-[0_-30px_60px_rgba(0,0,0,0.05)]">
         <div class="container mx-auto px-6 text-center">
             <span class="text-imberal-gold text-xs font-bold uppercase tracking-[0.4em] mb-4 block">Services</span>
             <h2 class="playfair text-4xl md:text-5xl text-imberal-dark mb-16">Εξειδικευμένες Λύσεις</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <!-- Card 1 -->
-                <div class="p-10 hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] transition-all duration-500 rounded-[2.5rem] border border-gray-50 group bg-gray-50/50">
-                    <div class="text-imberal-gold mb-6 flex justify-center">
-                        <div class="p-5 bg-white rounded-2xl shadow-sm transition-all duration-500 group-hover:bg-imberal-gold group-hover:text-white group-hover:rotate-6 animate-float delay-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="p-10 hover:shadow-[0_40px_70px_rgba(0,0,0,0.12)] transition-all duration-700 rounded-[3rem] border border-gray-100 group bg-gray-50/30 overflow-hidden relative">
+                    <div class="text-imberal-gold mb-8 flex justify-center">
+                        <div class="p-6 bg-white rounded-3xl shadow-md transition-all duration-700 group-hover:bg-imberal-gold group-hover:text-white group-hover:rotate-[360deg] group-hover:scale-110 animate-float delay-1 icon-hover-effect">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 transition-transform duration-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                             </svg>
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 text-imberal-dark uppercase tracking-tight group-hover:text-imberal-gold transition-colors">Ανάλυση Απόδοσης</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Συγκριτική μελέτη μεταξύ βραχυχρόνιας και μακροχρόνιας μίσθωσης για το δικό σας ακίνητο.</p>
+                    <h3 class="text-2xl font-bold mb-4 text-imberal-dark uppercase tracking-tight group-hover:text-imberal-gold transition-colors duration-500">Ανάλυση Απόδοσης</h3>
+                    <p class="text-gray-500 leading-relaxed group-hover:text-gray-700 transition-colors">Συγκριτική μελέτη μεταξύ βραχυχρόνιας και μακροχρόνιας μίσθωσης για το δικό σας ακίνητο.</p>
                 </div>
                 
                 <!-- Card 2 -->
-                <div class="p-10 hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] transition-all duration-500 rounded-[2.5rem] border border-gray-50 group bg-gray-50/50">
-                    <div class="text-imberal-gold mb-6 flex justify-center">
-                        <div class="p-5 bg-white rounded-2xl shadow-sm transition-all duration-500 group-hover:bg-imberal-gold group-hover:text-white group-hover:-rotate-6 animate-float delay-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="p-10 hover:shadow-[0_40px_70px_rgba(0,0,0,0.12)] transition-all duration-700 rounded-[3rem] border border-gray-100 group bg-gray-50/30 overflow-hidden relative">
+                    <div class="text-imberal-gold mb-8 flex justify-center">
+                        <div class="p-6 bg-white rounded-3xl shadow-md transition-all duration-700 group-hover:bg-imberal-gold group-hover:text-white group-hover:rotate-[360deg] group-hover:scale-110 animate-float delay-2 icon-hover-effect">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 transition-transform duration-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 text-imberal-dark uppercase tracking-tight group-hover:text-imberal-gold transition-colors">Εύρεση Ενοικιαστών</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Αυστηρό φιλτράρισμα και επιλογή των πιο αξιόπιστων ενοικιαστών της αγοράς.</p>
+                    <h3 class="text-2xl font-bold mb-4 text-imberal-dark uppercase tracking-tight group-hover:text-imberal-gold transition-colors duration-500">Εύρεση Ενοικιαστών</h3>
+                    <p class="text-gray-500 leading-relaxed group-hover:text-gray-700 transition-colors">Αυστηρό φιλτράρισμα και επιλογή των πιο αξιόπιστων ενοικιαστών της αγοράς.</p>
                 </div>
                 
                 <!-- Card 3 -->
-                <div class="p-10 hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] transition-all duration-500 rounded-[2.5rem] border border-gray-50 group bg-gray-50/50">
-                    <div class="text-imberal-gold mb-6 flex justify-center">
-                        <div class="p-5 bg-white rounded-2xl shadow-sm transition-all duration-500 group-hover:bg-imberal-gold group-hover:text-white group-hover:scale-110 animate-float delay-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="p-10 hover:shadow-[0_40px_70px_rgba(0,0,0,0.12)] transition-all duration-700 rounded-[3rem] border border-gray-100 group bg-gray-50/30 overflow-hidden relative">
+                    <div class="text-imberal-gold mb-8 flex justify-center">
+                        <div class="p-6 bg-white rounded-3xl shadow-md transition-all duration-700 group-hover:bg-imberal-gold group-hover:text-white group-hover:rotate-[360deg] group-hover:scale-110 animate-float delay-3 icon-hover-effect">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 transition-transform duration-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                             </svg>
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 text-imberal-dark uppercase tracking-tight group-hover:text-imberal-gold transition-colors">Νομική Κάλυψη</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Εξασφάλιση όλων των νομικών διαδικασιών και σύνταξη ισχυρών μισθωτηρίων.</p>
+                    <h3 class="text-2xl font-bold mb-4 text-imberal-dark uppercase tracking-tight group-hover:text-imberal-gold transition-colors duration-500">Νομική Κάλυψη</h3>
+                    <p class="text-gray-500 leading-relaxed group-hover:text-gray-700 transition-colors">Εξασφάλιση όλων των νομικών διαδικασιών και σύνταξη ισχυρών μισθωτηρίων.</p>
                 </div>
             </div>
         </div>
