@@ -13,7 +13,7 @@
         .rating-card.selected { border-color: #2563eb; background-color: #eff6ff; transform: translateY(-5px); }
         .rating-card:hover { transform: translateY(-3px); }
         
-        /* Loading spinner */
+        /* Στοιχείο φόρτωσης */
         .spinner {
             border: 3px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
@@ -30,8 +30,9 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- Header -->
+    <!-- Επικεφαλίδα με το Logo της Imberal -->
     <header class="imberal-gradient py-12 px-6 text-center text-white shadow-lg">
+        <img src="Imberal-White.png" alt="Imberal Logo" style="width: 280px; max-width: 80%; margin: 0 auto;" onerror="this.style.display='none'">
         <h1 class="text-3xl font-extrabold italic tracking-tighter uppercase mb-2">IMBERAL</h1>
         <p class="text-blue-400 text-xs tracking-[0.4em] uppercase font-bold">Property Management</p>
     </header>
@@ -44,12 +45,19 @@
                     <p class="text-slate-500">Σας ευχαριστούμε για το ραντεβού. Παρακαλούμε αφιερώστε 10 δευτερόλεπτα για να μας πείτε πώς τα πήγαμε.</p>
                 </div>
 
-                <!-- Χρησιμοποιήστε το Email σας ή το Form ID από το Formspree.io -->
-                <form id="feedback-form" action="https://formspree.io/f/akiskarentzos@imberal.gr" method="POST">
+                <!-- Web3Forms API -->
+                <form id="feedback-form" action="https://api.web3forms.com/submit" method="POST">
                     
+                    <!-- Το Access Key σας από το Web3Forms Dashboard -->
+                    <input type="hidden" name="access_key" value="ba59c779-a9d8-44eb-9e85-414612e149c7">
+                    
+                    <!-- Ρυθμίσεις εμφάνισης του email που θα λαμβάνετε -->
+                    <input type="hidden" name="subject" value="Νέο Feedback Ραντεβού - Imberal">
+                    <input type="hidden" name="from_name" value="Imberal Feedback System">
+                    
+                    <!-- Επιλεγμένη αξιολόγηση (επιλέγεται μέσω JS ή URL) -->
                     <input type="hidden" name="Αξιολόγηση" id="rating-input" value="Μη καθορισμένο" required>
 
-                    <!-- Rating Selection -->
                     <div class="grid grid-cols-3 gap-4 mb-8">
                         <div onclick="selectRating('Πολύ Ικανοποιημένος', this)" class="rating-card bg-slate-50 p-6 rounded-2xl text-center" id="opt-positive">
                             <span class="text-4xl block mb-2">😊</span>
@@ -76,29 +84,31 @@
                 </form>
             </div>
 
-            <!-- Success Message -->
+            <!-- Μήνυμα επιτυχίας μετά την υποβολή -->
             <div id="success-container" class="hidden text-center py-10">
                 <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">
                     ✓
                 </div>
                 <h2 class="text-3xl font-bold text-slate-900 mb-4">Ευχαριστούμε!</h2>
-                <p class="text-slate-500 mb-8">Η αξιολόγησή σας υποβλήθηκε με επιτυχία.</p>
+                <p class="text-slate-500 mb-8">Η αξιολόγησή σας υποβλήθηκε με επιτυχία στον Άκη Καρεντζο.</p>
                 <a href="https://imberal.gr" class="text-blue-600 font-bold hover:underline">Επιστροφή στην Imberal</a>
             </div>
         </div>
     </main>
 
     <footer class="p-8 text-center text-slate-400 text-xs">
-        &copy; 2024 Imberal Property Management.
+        &copy; 2024 Imberal Property Management. Εμπιστοσύνη που χτίζεται με αποτελέσματα.
     </footer>
 
     <script>
+        // Λειτουργία επιλογής αξιολόγησης (μεταβολή στυλ και τιμής input)
         function selectRating(value, element) {
             document.getElementById('rating-input').value = value;
             document.querySelectorAll('.rating-card').forEach(card => card.classList.remove('selected'));
             element.classList.add('selected');
         }
 
+        // Αυτόματη επιλογή emoji αν υπάρχει παράμετρος στο URL (π.χ. ?rating=positive)
         window.onload = () => {
             const params = new URLSearchParams(window.location.search);
             const rating = params.get('rating');
@@ -110,33 +120,39 @@
         const form = document.getElementById('feedback-form');
         const submitBtn = document.getElementById('submit-btn');
 
+        // Χειρισμός της υποβολής της φόρμας μέσω API
         form.onsubmit = async (e) => {
             e.preventDefault();
-            
-            // UI Feedback during loading
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="spinner"></span> Αποστολή...';
 
-            const data = new FormData(form);
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
             try {
-                const response = await fetch(form.action, {
+                const response = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
                 });
 
-                if (response.ok) {
+                const result = await response.json();
+                if (response.status === 200) {
                     document.getElementById('form-container').classList.add('hidden');
                     document.getElementById('success-container').classList.remove('hidden');
                 } else {
-                    const errorData = await response.json();
-                    console.error(errorData);
-                    alert("Πρέπει πρώτα να επιβεβαιώσετε το email σας από το Formspree. Ελέγξτε τα εισερχόμενά σας.");
+                    console.error(result);
+                    alert("Κάτι πήγε στραβά: " + (result.message || "Προσπαθήστε ξανά αργότερα."));
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = 'Αποστολή Feedback';
                 }
             } catch (error) {
-                alert("Σφάλμα σύνδεσης. Βεβαιωθείτε ότι είστε συνδεδεμένοι στο internet.");
+                console.error(error);
+                alert("Σφάλμα σύνδεσης. Βεβαιωθείτε ότι είστε συνδεδεμένοι στο διαδίκτυο.");
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Αποστολή Feedback';
             }
